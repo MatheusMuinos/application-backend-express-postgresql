@@ -18,6 +18,11 @@ export default (sequelize, Sequelize) => {
         password: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        balance: {
+            type: Sequelize.FLOAT,
+            allowNull: false,
+            defaultValue: 0.0
         }
     });
 
