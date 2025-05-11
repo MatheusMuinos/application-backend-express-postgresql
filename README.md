@@ -215,9 +215,3 @@ curl -X POST https://application-backend-express-postgresql.vercel.app/transacti
 - **Sequelize** como ORM.
 - **JWT** para autenticação.
 - **Docker** para gerenciamento do banco de dados local.
-
----
-
-## Licença
-
-Este projeto está sob a licença MIT.
