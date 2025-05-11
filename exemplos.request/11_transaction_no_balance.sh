@@ -5,6 +5,6 @@ curl -X POST http://localhost:3000/transactions \
     "amount": 1000000.00,
     "description": "Tentativa de transferência sem saldo",
     "type": "transfer",
-    "senderUserId": 1,
+    "userId": 1,
     "receiverUserId": 2
 }'
