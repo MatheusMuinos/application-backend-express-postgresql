@@ -1,25 +1,38 @@
-import { Sequelize } from 'sequelize';
+import { DataTypes } from "sequelize";
 
-export default (sequelize) => {
-    const Transaction = sequelize.define("Transaction", {
+const Transaction = (sequelize) => {
+    return sequelize.define("Transaction", {
         id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
         amount: {
-            type: Sequelize.FLOAT,
+            type: DataTypes.FLOAT,
             allowNull: false,
         },
         description: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: true,
         },
         date: {
-            type: Sequelize.DATE,
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        },
+        type: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        receiverUserId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
     });
-
-    return Transaction;
 };
+
+export default Transaction;

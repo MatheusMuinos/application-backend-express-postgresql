@@ -5,7 +5,13 @@ import db from "./models/index.js";
 import userRoute from "./routes/user.route.js";
 import transactionRoute from "./routes/transaction.route.js";
 
-db.sequelize.sync({ alter: true });
+db.sequelize.sync() // Remova alter: true
+    .then(() => {
+        console.log("Database synchronized");
+    })
+    .catch((error) => {
+        console.error("Error synchronizing database:", error);
+    });
 
 const app = express();
 
