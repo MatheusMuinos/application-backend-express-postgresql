@@ -51,6 +51,11 @@ transactionRouter.post("/", async (req, res) => {
             }
         }
 
+        // Verifica se o remetente tem saldo suficiente
+        if ((type === "expense" || type === "transfer") && sender.balance < amount) {
+            return res.status(400).json({ error: "Insufficient balance." });
+        }
+
         // Atualiza os saldos e cria a transação
         if (type === "income") {
             sender.balance += amount;
