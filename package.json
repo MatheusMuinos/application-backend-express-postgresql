@@ -1,11 +1,11 @@
 {
-  "name": "backend-express-mongodb",
+  "name": "application-backend-express-postgresql",
   "version": "1.0.0",
-  "description": "Atividade avaliativa 01 - Backend em express com autenticação(JWT) e postgresql em produção",
-  "main": "api/index.js",
+  "description": "Sistema de Transações - Backend Express com PostgreSQL",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start:app": "nodemon api/index.js",
+    "start:app": "nodemon src/index.js",
     "start:database": "docker-compose up -d",
     "stop:database": "docker-compose down",
     "generate-secret-key": "node -e \"console.log(require('crypto').randomBytes(32).toString('hex'))\""
