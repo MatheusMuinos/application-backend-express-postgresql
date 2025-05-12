@@ -5,5 +5,6 @@ curl -X POST http://localhost:3000/transactions \
     "amount": 150.00,
     "description": "Transferência para usuário 2",
     "type": "transfer",
+    "userId": 1,
     "receiverUserId": 2
 }'
