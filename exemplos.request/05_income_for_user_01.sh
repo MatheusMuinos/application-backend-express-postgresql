@@ -4,6 +4,5 @@ curl -X POST http://localhost:3000/transactions \
 -d '{
     "amount": 1000.00,
     "description": "Salário",
-    "type": "income",
-    "userId": 1
+    "type": "income"
 }'
