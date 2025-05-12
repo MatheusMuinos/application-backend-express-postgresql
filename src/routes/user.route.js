@@ -2,7 +2,13 @@ import express from 'express';
 import userController from '../controller/user.controller.js';
 import verifyToken from '../middlewares/jwt.token.middleware.js';
 import secureController from '../controller/secure.controller.js';
-import * as transactionController from '../controller/transaction.controller.js';
+import { 
+    createTransactionHandler,
+    getTransactionsHandler,
+    getTransactionHandler,
+    updateTransactionHandler,
+    deleteTransactionHandler
+} from '../controller/transaction.controller.js';
 
 const router = express.Router();
 
@@ -19,10 +25,11 @@ router.get('/', (req, res) => {
 // Rotas protegidas (exigem token)
 router.use(verifyToken);
 
-router.post('/', transactionController.createTransactionHandler);
-router.get('/transactions', transactionController.getTransactionsHandler);
-router.get('/transactions/:id', transactionController.getTransactionHandler);
-router.put('/transactions/:id', transactionController.updateTransactionHandler);
-router.delete('/transactions/:id', transactionController.deleteTransactionHandler);
+// Rotas de transação
+router.post('/transactions', createTransactionHandler);
+router.get('/transactions', getTransactionsHandler);
+router.get('/transactions/:id', getTransactionHandler);
+router.put('/transactions/:id', updateTransactionHandler);
+router.delete('/transactions/:id', deleteTransactionHandler);
 
 export default router;
