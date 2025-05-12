@@ -11,12 +11,18 @@ router.post('/login', userController.login);
 router.get('/users', userController.getAllUsers);
 router.get('/secure', verifyToken, secureController.Endpoint);
 
-router.use(verifyToken); // protege todas as rotas abaixo
+// ROTA PÚBLICA PARA STATUS DO BANCO
+router.get('/', (req, res) => {
+  res.send('Banco de Dados está no ar!');
+});
+
+// Rotas protegidas (exigem token)
+router.use(verifyToken);
 
 router.post('/', transactionController.createTransactionHandler);
-router.get('/', transactionController.getTransactionsHandler);
-router.get('/:id', transactionController.getTransactionHandler);
-router.put('/:id', transactionController.updateTransactionHandler);
-router.delete('/:id', transactionController.deleteTransactionHandler);
+router.get('/transactions', transactionController.getTransactionsHandler);
+router.get('/transactions/:id', transactionController.getTransactionHandler);
+router.put('/transactions/:id', transactionController.updateTransactionHandler);
+router.delete('/transactions/:id', transactionController.deleteTransactionHandler);
 
 export default router;
