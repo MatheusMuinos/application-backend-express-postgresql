@@ -35,39 +35,6 @@ Este projeto é um backend desenvolvido em **Node.js** com **Express** e **Postg
   - O saldo do usuário (`userId`) é incrementado pelo valor enviado na transação.
   - Uma nova transação é registrada no banco de dados.
 
-- **Exemplo de requisição**:
-
-```bash
-curl -X POST https://application-backend-express-postgresql.vercel.app/transactions \
--H "Content-Type: application/json" \
--H "Authorization: Bearer $USER1_TOKEN" \
--d '{
-    "amount": 2500.00,
-    "description": "Salário",
-    "type": "income",
-    "userId": 1
-}'
-```
-
-- **Resposta esperada**:
-```json
-{
-    "message": "Transaction created successfully!",
-    "transaction": {
-        "id": 1,
-        "amount": 2500.00,
-        "description": "Salário",
-        "type": "income",
-        "userId": 1,
-        "receiverUserId": null,
-        "createdAt": "2025-05-11T12:00:00.000Z",
-        "updatedAt": "2025-05-11T12:00:00.000Z"
-    },
-    "senderBalance": 2500.00,
-    "receiverBalance": null
-}
-```
-
 ---
 
 ### 2. **Expense (Saída de Valores)**
@@ -76,39 +43,6 @@ curl -X POST https://application-backend-express-postgresql.vercel.app/transacti
 - **O que acontece após a requisição**:
   - O saldo do usuário (`userId`) é decrementado pelo valor enviado na transação.
   - Uma nova transação é registrada no banco de dados.
-
-- **Exemplo de requisição**:
-
-```bash
-curl -X POST https://application-backend-express-postgresql.vercel.app/transactions \
--H "Content-Type: application/json" \
--H "Authorization: Bearer $USER1_TOKEN" \
--d '{
-    "amount": 250.00,
-    "description": "Conta de água",
-    "type": "expense",
-    "userId": 1
-}'
-```
-
-- **Resposta esperada**:
-```json
-{
-    "message": "Transaction created successfully!",
-    "transaction": {
-        "id": 2,
-        "amount": 250.00,
-        "description": "Conta de água",
-        "type": "expense",
-        "userId": 1,
-        "receiverUserId": null,
-        "createdAt": "2025-05-11T12:00:00.000Z",
-        "updatedAt": "2025-05-11T12:00:00.000Z"
-    },
-    "senderBalance": 2250.00,
-    "receiverBalance": null
-}
-```
 
 ---
 
@@ -120,41 +54,6 @@ curl -X POST https://application-backend-express-postgresql.vercel.app/transacti
   - O saldo do destinatário (`receiverUserId`) é incrementado pelo mesmo valor.
   - Uma nova transação é registrada no banco de dados.
 
-- **Exemplo de requisição**:
-
-
-```bash
-curl -X POST https://application-backend-express-postgresql.vercel.app/transactions \
--H "Content-Type: application/json" \
--H "Authorization: Bearer $USER1_TOKEN" \
--d '{
-    "amount": 500.00,
-    "description": "Pagamento para usuario2",
-    "type": "transfer",
-    "userId": 1,
-    "receiverUserId": 2
-}'
-```
-
-- **Resposta esperada**:
-```json
-{
-    "message": "Transaction created successfully!",
-    "transaction": {
-        "id": 3,
-        "amount": 500.00,
-        "description": "Pagamento para usuario2",
-        "type": "transfer",
-        "userId": 1,
-        "receiverUserId": 2,
-        "createdAt": "2025-05-11T12:00:00.000Z",
-        "updatedAt": "2025-05-11T12:00:00.000Z"
-    },
-    "senderBalance": 1750.00,
-    "receiverBalance": 500.00
-}
-```
-
 ---
 
 ### 4. **Validação de Saldo Insuficiente**
@@ -162,28 +61,6 @@ curl -X POST https://application-backend-express-postgresql.vercel.app/transacti
 - **Descrição**: Impede que o saldo do remetente fique negativo.
 - **O que acontece após a requisição**:
   - A transação é rejeitada se o saldo do remetente for insuficiente.
-
-- **Exemplo de requisição**:
-
-```bash
-curl -X POST https://application-backend-express-postgresql.vercel.app/transactions \
--H "Content-Type: application/json" \
--H "Authorization: Bearer $USER1_TOKEN" \
--d '{
-    "amount": 1000000.00,
-    "description": "Tentativa de transferência sem saldo",
-    "type": "transfer",
-    "userId": 1,
-    "receiverUserId": 2
-}'
-```
-
-- **Resposta esperada**:
-```json
-{
-    "error": "Insufficient balance."
-}
-```
 
 ---
 
@@ -197,14 +74,18 @@ curl -X POST https://application-backend-express-postgresql.vercel.app/transacti
 2. **Configurar variáveis de ambiente**:
    - Edite o arquivo `.env` com as credenciais do banco de dados e o segredo JWT.
 
-3. **Iniciar o servidor**:
-   ```bash
-   npm run start:app
-   ```
 
-4. **Executar o banco de dados localmente (opcional)**:
+3. **Executar o banco de dados localmente**:
    ```bash
    npm run start:database
+   ```
+
+4. **Iniciar o servidor**:
+   ```bash
+   npm run start:app
+   ```3. **Iniciar o servidor**:
+   ```bash
+   npm run start:app
    ```
 
 ---
@@ -216,3 +97,5 @@ curl -X POST https://application-backend-express-postgresql.vercel.app/transacti
 - **Sequelize** como ORM.
 - **JWT** para autenticação.
 - **Docker** para gerenciamento do banco de dados local.
+
+Autor: Matheus Sarno Muiños
