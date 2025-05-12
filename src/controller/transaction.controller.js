@@ -8,11 +8,13 @@ import {
     deleteTransaction
 } from '../services/transaction.service.js';
 
-// Cria uma nova transação
+// Cria uma nova transação (apenas para o usuário autenticado)
 export const createTransactionHandler = async (req, res) => {
     try {
-        const userId = req.userId;
-        const transaction = await createTransaction(userId, req.body);
+        const userId = req.userId; // sempre do token
+        // Garante que a transação será criada apenas para o usuário autenticado
+        const transactionData = { ...req.body, userId };
+        const transaction = await createTransaction(userId, transactionData);
         res.status(201).json(transaction);
     } catch (error) {
         console.error('Erro ao criar transação:', error);
@@ -20,7 +22,7 @@ export const createTransactionHandler = async (req, res) => {
     }
 };
 
-// Busca todas as transações de um usuário
+// Busca todas as transações do usuário autenticado
 export const getTransactionsHandler = async (req, res) => {
     try {
         const userId = req.userId;
@@ -32,7 +34,7 @@ export const getTransactionsHandler = async (req, res) => {
     }
 };
 
-// Busca uma transação específica por ID
+// Busca uma transação específica do usuário autenticado
 export const getTransactionHandler = async (req, res) => {
     try {
         const userId = req.userId;
@@ -46,11 +48,12 @@ export const getTransactionHandler = async (req, res) => {
     }
 };
 
-// Atualiza uma transação
+// Atualiza uma transação do usuário autenticado
 export const updateTransactionHandler = async (req, res) => {
     try {
         const userId = req.userId;
         const transactionId = req.params.id;
+        // Só permite atualizar se a transação pertence ao usuário autenticado
         const updatedTransaction = await updateTransaction(userId, transactionId, req.body);
         res.status(200).json(updatedTransaction);
     } catch (error) {
@@ -59,7 +62,7 @@ export const updateTransactionHandler = async (req, res) => {
     }
 };
 
-// Deleta uma transação
+// Deleta uma transação do usuário autenticado
 export const deleteTransactionHandler = async (req, res) => {
     try {
         const userId = req.userId;

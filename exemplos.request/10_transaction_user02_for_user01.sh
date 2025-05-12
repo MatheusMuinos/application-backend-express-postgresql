@@ -1,6 +1,6 @@
 curl -X POST http://localhost:3000/transactions \
 -H "Content-Type: application/json" \
--H "Authorization: Bearer $USER1_TOKEN" \
+-H "Authorization: Bearer $USER2_TOKEN" \
 -d '{
     "amount": 800.00,
     "description": "Pagamento para usuario2",
