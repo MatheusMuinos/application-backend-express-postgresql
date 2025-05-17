@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import db from "./models/index.js";
 import userRoute from "./routes/user.route.js";
 import transactionRoute from "./routes/transaction.route.js";
@@ -14,6 +15,10 @@ db.sequelize.sync()
 
 const app = express();
 
+app.use(cors({
+  origin: '*', 
+  credentials: true
+}));
 
 app.get('/', (req, res) => {
   res.send('Banco de Dados está no ar!');
